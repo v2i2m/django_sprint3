@@ -31,7 +31,8 @@ def category_posts(request, category_slug):
     category = get_object_or_404(
         Category, slug=category_slug, is_published=True
     )
-    posts = Post.objects.select_related('category', 'author', 'location').filter(
+    posts = Post.objects.select_related(
+        'category', 'author', 'location').filter(
         category=category, is_published=True,
         pub_date__date__lt=datetime.now())
     context = {
